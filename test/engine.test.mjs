@@ -42,7 +42,7 @@ test('plain Swahili stays GSM-7 and costs one segment', () => {
   assert.equal(result.segments, 1);
 });
 
-test('one non-GSM character flips the whole message to UCS-2 and doubles the price', () => {
+test('one non-GSM character flips the whole message to UCS-2 and multiplies segments', () => {
   const plain = segmentation('a'.repeat(160));
   assert.equal(plain.encoding, 'GSM-7');
   assert.equal(plain.segments, 1);
@@ -53,6 +53,15 @@ test('one non-GSM character flips the whole message to UCS-2 and doubles the pri
 
   const emoji = segmentation('Ofa poa \u{1F525}');
   assert.equal(emoji.encoding, 'UCS-2');
+});
+
+test('UCS-2 counts an emoji as two units, the way the operator bills it', () => {
+  const withEmoji = segmentation(`${'a'.repeat(70)}\u{1F525}`);
+  assert.equal(withEmoji.units, 72, '70 chars + a 2-unit emoji');
+  assert.equal(withEmoji.segments, 2, 'a 72-unit UCS-2 message needs two segments');
+
+  const noEmoji = segmentation('a'.repeat(70));
+  assert.equal(noEmoji.segments, 1, 'the same length without the emoji still fits one');
 });
 
 test('multipart GSM-7 uses 153-character segments', () => {

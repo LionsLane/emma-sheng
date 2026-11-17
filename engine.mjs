@@ -37,12 +37,12 @@ const BANK = {
       '{shop} has just received {product}. Price is {price}. Reserve on {phone} — they move fast.',
     ],
     sw: [
-      'Mpya {shop}: {product} imeingia sasa hivi kwa {price}. Piga {phone} kuhifadhi yako kabla hazijaisha.',
+      'Mpya {shop}: {product} imeingia sasa hivi kwa {price}. Piga {phone} uweke oda kabla hazijaisha.',
       '{shop} imepokea {product} mpya. Bei ni {price}. Hifadhi kwa {phone} haraka.',
     ],
     sheng: [
-      'Msee, {shop} kuna stock mpya: {product}. Bei ni {price} tu. Piga {phone} ureserve yako kabla ziishe.',
-      '{product} zimeingia {shop} leo. Bei ni fit — {price}. Cheki {phone} upate zako mapema.',
+      'Msee, {shop} kuna stock mpya: {product}. Bei ni {price} tu. Piga {phone} uweke yako kabla ziishe.',
+      '{product} zimeingia {shop} leo. Bei iko poa — {price}. Piga {phone} upate zako mapema.',
     ],
   },
   discount: {
@@ -55,7 +55,7 @@ const BANK = {
       'Punguzo {shop}: {product} imeshuka mpaka {price}. Inaisha {until}. Piga {phone}.',
     ],
     sheng: [
-      'Donge {shop}! {product} imeshuka mpaka {price}. Hii ofa inaenda {until} — cheki na {phone}.',
+      'Ofa iko {shop}! {product} imeshuka mpaka {price}. Hii ofa inaenda {until} — piga {phone}.',
       'Bei ni poa {shop}: {product} sasa {price}. Inaisha {until}. Piga {phone} haraka.',
     ],
   },
@@ -111,7 +111,7 @@ const BANK = {
       'Tunakushukuru kwa kuchagua {shop}. {product} ni {price}, piga {phone}.',
     ],
     sheng: [
-      'Asante sana msee kwa kusupport {shop}. {product} ziko {price} time yoyote — {phone}.',
+      'Asante sana msee kwa kusupport {shop}. {product} ni {price} — ukihitaji tena, tupigie {phone}.',
       'Shukran kwa kuunga {shop} mkono. {product} ni {price} ukipiga {phone}.',
     ],
   },
@@ -180,7 +180,9 @@ export function segmentation(text) {
     };
   }
 
-  const cps = [...value].length;
+  // UTF-16 code units, not code points: providers bill an emoji as two units
+  // in UCS-2, and counting it as one under-bills a message near a 70/67 split.
+  const cps = value.length;
   const segments = cps === 0 ? 0 : cps <= 70 ? 1 : Math.ceil(cps / 67);
   const perSegment = segments <= 1 ? 70 : 67;
   return {
@@ -207,6 +209,11 @@ export const KES_PER_MB = 0.25;
 /** Typical product photo the same shop would otherwise send. */
 export const PHOTO_KB = 450;
 
+/**
+ * Payload estimate for one blast — data spend, not SMS tariff.
+ * Operators bill SMS per segment (above); this answers "what does sending
+ * this to N customers cost in airtime data".
+ */
 export function campaignCost(text, recipients = 200) {
   const { bytes, mb } = dataWeight(text);
   const totalMb = mb * recipients;

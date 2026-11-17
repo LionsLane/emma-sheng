@@ -43,6 +43,9 @@ function card(item) {
   lang.className = 'lang';
   lang.textContent = item.label;
 
+  const actions = document.createElement('div');
+  actions.className = 'actions';
+
   const copy = document.createElement('button');
   copy.type = 'button';
   copy.className = 'copy';
@@ -61,7 +64,15 @@ function card(item) {
     }
   });
 
-  head.append(lang, copy);
+  const wa = document.createElement('a');
+  wa.className = 'copy wa';
+  wa.textContent = 'WhatsApp';
+  wa.href = `https://wa.me/?text=${encodeURIComponent(item.text)}`;
+  wa.target = '_blank';
+  wa.rel = 'noopener noreferrer';
+
+  actions.append(copy, wa);
+  head.append(lang, actions);
 
   const msg = document.createElement('p');
   msg.className = 'msg';
@@ -72,7 +83,7 @@ function card(item) {
   meta.innerHTML = [
     `SMS <b>${item.sms.segments}</b> segment${item.sms.segments === 1 ? '' : 's'} · ${item.sms.encoding}`,
     `<b>${item.sms.units}</b>/${item.sms.capacity} chars`,
-    `<b>0.${String(Math.round(item.cost.bytes)).padStart(3, '0')} KB</b> per message`,
+    `<b>${item.cost.bytes} B</b> per message`,
   ].join('<span aria-hidden="true">·</span>');
 
   el.append(head, msg, meta);
