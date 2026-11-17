@@ -1,0 +1,14 @@
+{
+  "name": "emma-sheng",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Zero-token Swahili and Sheng campaign localiser for Kenyan SMEs — a feature of EMMA.",
+  "scripts": {
+    "test": "node --test test/engine.test.mjs",
+    "dev": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

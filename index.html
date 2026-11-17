@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EMMA Sheng — one brief, three languages, no tokens</title>
+    <meta
+      name="description"
+      content="Turn one campaign brief into sendable English, Kiswahili and Sheng messages for Kenyan SMEs, with SMS segment and data cost built in."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap">
+        <div class="brandline">
+          <span class="mark">EMMA</span>
+          <span class="slash">/</span>
+          <span class="product">Sheng</span>
+        </div>
+        <h1>One brief. Three languages. Zero tokens.</h1>
+        <p class="lede">
+          Kenyan customers buy on WhatsApp, in a mix of English, Kiswahili and Sheng. Most
+          marketing tools only speak English. EMMA Sheng localises a campaign for the three
+          languages your customers actually use, and shows the airtime cost before you send it.
+        </p>
+        <ul class="facts">
+          <li><strong>0</strong> model calls per campaign</li>
+          <li><strong>3</strong> languages, one brief</li>
+          <li><strong>~0.4 KB</strong> per message sent</li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="wrap grid">
+      <section class="panel" aria-labelledby="brief-heading">
+        <h2 id="brief-heading">Campaign brief</h2>
+        <form id="brief" autocomplete="off">
+          <label>
+            <span>What is the message?</span>
+            <select id="intent" name="intent"></select>
+          </label>
+          <label>
+            <span>Product</span>
+            <input id="product" name="product" placeholder="Gas cooker 13kg" value="Gas cooker 13kg" />
+          </label>
+          <label>
+            <span>Shop name</span>
+            <input id="shop" name="shop" placeholder="Mama Njeri Stores" value="Mama Njeri Stores" />
+          </label>
+          <div class="row">
+            <label>
+              <span>Price (KES)</span>
+              <input id="price" name="price" type="number" min="0" step="10" value="4500" />
+            </label>
+            <label>
+              <span>Town</span>
+              <input id="town" name="town" placeholder="Nakuru" value="Nakuru" />
+            </label>
+          </div>
+          <div class="row">
+            <label>
+              <span>Phone</span>
+              <input id="phone" name="phone" placeholder="0712 345 678" value="0712345678" />
+            </label>
+            <label>
+              <span>Offer ends</span>
+              <input id="until" name="until" placeholder="Friday" value="Friday" />
+            </label>
+          </div>
+          <label>
+            <span>Customers on the list</span>
+            <input id="recipients" name="recipients" type="number" min="1" step="10" value="200" />
+          </label>
+          <button type="submit">Localise campaign</button>
+          <p id="hint" class="hint" role="status"></p>
+        </form>
+      </section>
+
+      <section class="results" aria-live="polite" aria-labelledby="out-heading">
+        <h2 id="out-heading">Ready to send</h2>
+        <div id="cards"></div>
+        <p class="footnote">
+          Segments and data cost are computed locally with the same GSM-7 / UCS-2 rules the
+          operator bills on. Nothing here leaves your browser.
+        </p>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,264 @@
+:root {
+  --ink: #1d1712;
+  --ink-soft: #5b4a3c;
+  --paper: #fbf7f1;
+  --card: #ffffff;
+  --line: #e6dbcd;
+  --clay: #b4532a;
+  --clay-dark: #8f3f1e;
+  --saffron: #e9a13b;
+  --good: #2f6b4f;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.55 "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.wrap {
+  width: min(1120px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+/* header */
+.top {
+  background: radial-gradient(120% 140% at 10% 0%, #2a1c12 0%, #1d1712 55%, #241a13 100%);
+  color: #f7efe4;
+  padding: 2.6rem 0 2.2rem;
+  border-bottom: 3px solid var(--saffron);
+}
+
+.brandline {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.mark {
+  color: var(--saffron);
+}
+
+.slash {
+  color: #7b6350;
+}
+
+.product {
+  color: #f7efe4;
+}
+
+.top h1 {
+  font-size: clamp(1.9rem, 4.4vw, 3rem);
+  line-height: 1.1;
+  margin: 0.9rem 0 0.7rem;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  max-width: 62ch;
+  color: #d9c8b6;
+  margin: 0 0 1.4rem;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  color: #cbb6a0;
+}
+
+.facts strong {
+  color: var(--saffron);
+  font-size: 1.15rem;
+  margin-right: 0.25rem;
+}
+
+/* layout */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: 1.8rem;
+  align-items: start;
+  padding: 2.2rem 0 3rem;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+h2 {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 1rem;
+}
+
+/* form */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.4rem;
+  box-shadow: 0 1px 0 rgba(29, 23, 18, 0.04);
+}
+
+form {
+  display: grid;
+  gap: 0.85rem;
+}
+
+label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+input,
+select {
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #fffdfa;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 0.55rem 0.65rem;
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid var(--saffron);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+button {
+  font: inherit;
+  font-weight: 650;
+  color: #fff;
+  background: var(--clay);
+  border: 0;
+  border-radius: 9px;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  margin-top: 0.3rem;
+}
+
+button:hover {
+  background: var(--clay-dark);
+}
+
+.hint {
+  min-height: 1.2em;
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--clay-dark);
+}
+
+/* results */
+#cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--clay);
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.card:nth-child(2) {
+  border-left-color: var(--saffron);
+}
+
+.card:nth-child(3) {
+  border-left-color: #6b4a2f;
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.lang {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.msg {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+}
+
+.meta b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.copy {
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: #f6ece0;
+  color: var(--clay-dark);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 0.32rem 0.7rem;
+  margin: 0;
+}
+
+.copy:hover {
+  background: #f0e0cf;
+}
+
+.copy.done {
+  background: var(--good);
+  border-color: var(--good);
+  color: #fff;
+}
+
+.footnote {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin: 1rem 0 0;
+  max-width: 60ch;
+}
